@@ -110,8 +110,8 @@ defmodule ExTwitter.API.Streaming do
         receive_next_tweet(nil, req, timeout)
 
       {:error, message} ->
-        Logger.error "Error returned, stopping stream (#{inspect(message)})."
-        {:halt, {req, pid}}
+        Logger.error "Faulty tweet"
+        receive_next_tweet(pid, req, timeout)
 
       _ ->
         receive_next_tweet(pid, req, timeout)
